@@ -13,8 +13,8 @@ class TestController {
 
     @GetMapping("/test")
     fun test() : String {
-        testRepo.save(Test("Hello"));
-        testRepo.save(Test("World"));
+        testRepo.save(Test("Helloo"));
+        testRepo.save(Test("World!"));
         return "TEST SUCCESSFULL";
     }
 
