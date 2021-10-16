@@ -1,16 +1,39 @@
 package net.thexcoders.aladin_bot_backend.nlp_models;
 
+
+import net.thexcoders.aladin_bot_backend.exceptions.AladinException;
+import opennlp.tools.langdetect.Language;
+import opennlp.tools.langdetect.LanguageDetector;
+import opennlp.tools.langdetect.LanguageDetectorME;
+import opennlp.tools.langdetect.LanguageDetectorModel;
+
 import java.io.File;
+import java.io.IOException;
 
-public abstract class LangDetector  {
-    protected final String path = "src/main/resources/";
-    protected String fileName;
+public class LangDetector extends NLPModel{
 
-    public boolean testFile(String fileName){
-        File file = new File(path+fileName);
-        return file.exists();
+    private LanguageDetectorModel model;
+
+    public LangDetector() {
+        fileName = "langDetect.bin";
+        init();
     }
 
-    public abstract boolean init();
+    private boolean init() {
+        File file = new File(path + fileName);
+        try {
+            model = new LanguageDetectorModel(file);
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
+    }
+
+    public String detectLang(String input){
+        LanguageDetector lang = new LanguageDetectorME(model);
+        Language bestLanguage = lang.predictLanguage(input);
+        return bestLanguage.getLang();
+    }
+
 
 }
