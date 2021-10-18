@@ -10,11 +10,7 @@ class NLPModelsTest {
     @Test
     void testFileExists()  {
         LangDetector model = null;
-        try {
-            model = new LangDetector();
-        } catch (AladinException e) {
-            e.printStackTrace();
-        }
+        model = new LangDetector();
         assertTrue(model.testFile(model.fileName));
     }
 

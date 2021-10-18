@@ -11,7 +11,7 @@ import java.io.File
 @SpringBootApplication
 class AladinBotBackEndApplication : CommandLineRunner {
     override fun run(vararg args: String?) {
-        val path = "src/main/resources/";
+        /*val path = "src/main/resources/";
 
         val file = File(path+"sentence.bin")
 
@@ -21,7 +21,7 @@ class AladinBotBackEndApplication : CommandLineRunner {
         val sDetector = SentenceDetectorME(model)
         val sentences: Array<String> = sDetector.sentDetect(paragraph)
         System.out.flush();
-        sentences.forEach { x: String -> System.err.println(x) }
+        sentences.forEach { x: String -> System.err.println(x) }*/
 
     }
 }
