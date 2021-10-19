@@ -1,6 +1,6 @@
 package net.thexcoders.aladin_bot_backend.nlp_models;
 
-import net.thexcoders.aladin_bot_backend.exceptions.AladinException;
+import net.thexcoders.aladin_bot_backend.nlp_models.language.LangDetector;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

@@ -1,11 +1,8 @@
 package net.thexcoders.aladin_bot_backend
 
-import opennlp.tools.sentdetect.SentenceDetectorME
-import opennlp.tools.sentdetect.SentenceModel
 import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
-import java.io.File
 
 
 @SpringBootApplication
@@ -29,15 +26,3 @@ class AladinBotBackEndApplication : CommandLineRunner {
 fun main(args: Array<String>) {
     runApplication<AladinBotBackEndApplication>(*args)
 }
-
-/*
-
-
-This is a statement.
-This is another statement.
-Now is an abstract word for time, that is always flying.
-And my email address is google@gmail.com.
-
-
-
- */

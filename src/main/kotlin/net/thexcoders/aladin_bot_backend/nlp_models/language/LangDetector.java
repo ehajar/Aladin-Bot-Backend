@@ -1,14 +1,12 @@
-package net.thexcoders.aladin_bot_backend.nlp_models;
+package net.thexcoders.aladin_bot_backend.nlp_models.language;
 
 
-import net.thexcoders.aladin_bot_backend.converters.LangConverter;
-import net.thexcoders.aladin_bot_backend.repositories.TestRepo;
+import net.thexcoders.aladin_bot_backend.nlp_models.NLPModel;
 import opennlp.tools.langdetect.Language;
 import opennlp.tools.langdetect.LanguageDetector;
 import opennlp.tools.langdetect.LanguageDetectorME;
 import opennlp.tools.langdetect.LanguageDetectorModel;
 
-import javax.swing.table.TableModel;
 import java.io.File;
 import java.io.IOException;
 
@@ -22,7 +20,7 @@ public class LangDetector extends NLPModel {
     }
 
     private boolean init() {
-        File file = new File(path + fileName);
+        File file = generateFile();
         try {
             model = new LanguageDetectorModel(file);
             return true;

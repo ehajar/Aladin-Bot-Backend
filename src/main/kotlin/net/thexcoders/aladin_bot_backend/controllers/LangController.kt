@@ -1,12 +1,13 @@
-package net.thexcoders.aladin_bot_backend.controller
+package net.thexcoders.aladin_bot_backend.controllers
 
 import net.thexcoders.aladin_bot_backend.converters.converter
-import net.thexcoders.aladin_bot_backend.nlp_models.LangDetector
+import net.thexcoders.aladin_bot_backend.nlp_models.language.LangDetector
 import org.springframework.ui.ModelMap
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("language")
+@RequestMapping("API/language")
+@CrossOrigin("*")
 class LangController {
 
 
