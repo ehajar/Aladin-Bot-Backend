@@ -5,7 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static net.thexcoders.aladin_bot_backend.converters.LangConverterKt.*;
-import static net.thexcoders.aladin_bot_backend.converters.LangConverterKt.converter;
+import static net.thexcoders.aladin_bot_backend.converters.LangConverterKt.langToCodeConverter;
 import static org.junit.jupiter.api.Assertions.*;
 
 class LangDetectorTest {
@@ -24,9 +24,9 @@ class LangDetectorTest {
 
     @Test
     void testConverter(){
-        assertEquals(AR,converter("ara"));
-        assertEquals(FR,converter("fra"));
-        assertEquals(EN,converter("eng"));
-        assertEquals(UNKNOWN,converter("ita"));
+        assertEquals(AR, langToCodeConverter("ara"));
+        assertEquals(FR, langToCodeConverter("fra"));
+        assertEquals(EN, langToCodeConverter("eng"));
+        assertEquals(UNKNOWN, langToCodeConverter("ita"));
     }
 }

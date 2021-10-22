@@ -19,14 +19,11 @@ public class LangDetector extends NLPModel {
         init();
     }
 
-    private boolean init() {
+    private void init() {
         File file = generateFile();
         try {
             model = new LanguageDetectorModel(file);
-            return true;
-        } catch (IOException e) {
-            return false;
-        }
+        } catch (IOException ignored) {}
     }
 
     public String detectLang(String input) {
