@@ -44,7 +44,11 @@ public class ModelsParent {
 
         String[] sentences = sentenceDetector.toSentences(input.toLowerCase());
         for (String sentence : sentences) {
-            System.err.println("\n" + sentence);
+            if(sentence.toLowerCase().contains("hey")
+            || sentence.toLowerCase().contains("hello")
+            || sentence.toLowerCase().contains("hi")) {
+                res.add(new Categorizer.CategoryResult("greeting",1));
+            }
             String[] tokens = mTokenizer.tokenize(sentence);
             Categorizer.CategoryResult catResult = categorizer.getCategory(tokens,Categorizer.Language.EN);
             if (!catResult.isIn(res)) res.add(catResult);

@@ -85,6 +85,7 @@ public class Categorizer extends NLPModel {
         String category = categorizerME.getBestCategory(probabilites);
         System.err.print(category + "\t");
         double probability = probabilites[categorizerME.getIndex(category)];
+        if (probability < 0.1429) return  new CategoryResult("Unknown",probability);
         System.err.println("probability " + probability);
         return new CategoryResult(category, probability);
     }
@@ -109,6 +110,15 @@ public class Categorizer extends NLPModel {
                 if (isEqual(res)) return true;
             }
             return false;
+        }
+
+        @Override
+        public String toString() {
+            return "CategoryResult{" +
+                    "category='" + category + '\'' +
+                    ", probability=" + probability +
+                    ", catCode=" + catCode +
+                    '}';
         }
     }
 
