@@ -17,9 +17,7 @@ class CommunicationController {
         val message = data.getAttribute("message") as String;
         val langCode = data.getAttribute("langCode") as Int;
         val languageStr = codeToLangConverter(langCode);
-
         var model = ModelsParent(languageStr);
-
         return model.initToModelMap(message);
     }
 

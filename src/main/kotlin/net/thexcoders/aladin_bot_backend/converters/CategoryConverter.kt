@@ -17,7 +17,7 @@ fun categoryConverter(lang: String): Int {
         "create-data" -> CREATE_DATA
         "time-data" -> TIME_DATA
         "best-place" -> BEST_PLACE
-        "best-food " -> BEST_FOOD
+        "best-food" -> BEST_FOOD
         else -> UNKNOWN_CAT
     }
 }

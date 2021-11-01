@@ -1,6 +1,7 @@
 package net.thexcoders.aladin_bot_backend.converters
 
 import net.thexcoders.aladin_bot_backend.nlp_models.ModelsParent
+import net.thexcoders.aladin_bot_backend.nlp_models.categorizer.Categorizer
 
 
 const val UNKNOWN = -1;
@@ -17,10 +18,10 @@ fun langToCodeConverter(lang: String): Int {
     }
 }
 
-fun codeToLangConverter(code: Int): ModelsParent.Language {
+fun codeToLangConverter(code: Int): Categorizer.Language {
     return when (code) {
-        EN -> ModelsParent.Language.EN
-        FR -> ModelsParent.Language.FR
-        else -> ModelsParent.Language.EN
+        EN -> Categorizer.Language.EN
+        FR -> Categorizer.Language.FR
+        else -> Categorizer.Language.EN
     }
 }

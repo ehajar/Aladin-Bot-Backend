@@ -9,14 +9,15 @@ import java.util.ArrayList;
 
 import static net.thexcoders.aladin_bot_backend.converters.CategoryConverterKt.categoryConverter;
 
-// Singleton class due to the train mfunction
+// Singleton class due to the train function
 public class Categorizer extends NLPModel {
 
-    private DoccatModel model;
+    private DoccatModel enModel;
+    private DoccatModel frModel;
     private Language language;
     private static Categorizer instance;
 
-    enum Language {
+    public enum Language {
         EN("en"), FR("fr");
         String value;
 
@@ -28,9 +29,10 @@ public class Categorizer extends NLPModel {
 
     private Categorizer(Language language) {
         this.language = language;
-        fileName = "categories_" + language.value + ".txt";
-
-        this.model = train();
+        fileName = "categories_en.txt";
+        this.enModel = train("en");
+        fileName = "categories_fr.txt";
+        this.frModel = train("fr");
     }
 
     public static Categorizer getInstance(Language language) {
@@ -47,9 +49,9 @@ public class Categorizer extends NLPModel {
         return instance;
     }
 
-    public DoccatModel train() {
+    public DoccatModel train(String lang) {
         try {
-            InputStreamFactory dataIn = new MarkableFileInputStreamFactory(new File(path + fileName));
+            InputStreamFactory dataIn = new MarkableFileInputStreamFactory(new File(path + "categories_"+lang+".txt"));
             ObjectStream<String> lineStream =
                     new PlainTextByLineStream(dataIn, "UTF-8");
             ObjectStream<DocumentSample> sampleStream = new DocumentSampleStream(lineStream);
@@ -59,8 +61,8 @@ public class Categorizer extends NLPModel {
             params.put(TrainingParameters.ITERATIONS_PARAM, "500");
             params.put(TrainingParameters.CUTOFF_PARAM, "0");
 
-
-            model = DocumentCategorizerME.train(language.value,
+            DoccatModel model;
+            model = DocumentCategorizerME.train(lang,
                     sampleStream, params, factory);
             return model;
         } catch (FileNotFoundException e) {
@@ -72,8 +74,13 @@ public class Categorizer extends NLPModel {
         }
     }
 
-    public CategoryResult getCategory(String[] tokens) {
-        DocumentCategorizerME categorizerME = new DocumentCategorizerME(model);
+    public CategoryResult getCategory(String[] tokens, Language lang) {
+        DocumentCategorizerME categorizerME;
+        if (lang.equals(Language.EN)) {
+            categorizerME = new DocumentCategorizerME(enModel);
+        } else {
+            categorizerME = new DocumentCategorizerME(frModel);
+        }
         double[] probabilites = categorizerME.categorize(tokens);
         String category = categorizerME.getBestCategory(probabilites);
         System.err.print(category + "\t");
@@ -97,8 +104,8 @@ public class Categorizer extends NLPModel {
             return this.catCode == res.catCode;
         }
 
-        public boolean isIn(ArrayList<CategoryResult> list){
-            for (CategoryResult res : list){
+        public boolean isIn(ArrayList<CategoryResult> list) {
+            for (CategoryResult res : list) {
                 if (isEqual(res)) return true;
             }
             return false;

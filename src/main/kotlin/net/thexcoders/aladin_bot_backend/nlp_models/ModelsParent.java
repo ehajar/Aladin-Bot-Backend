@@ -10,15 +10,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ModelsParent {
-    Language lang;
+    Categorizer.Language lang;
 
-    public ModelsParent(Language lang) {
+    public ModelsParent(Categorizer.Language lang) {
         this.lang = lang;
     }
 
     public List<Categorizer.CategoryResult> init(String input) {
-        if (lang.equals(Language.EN)) return initEng(input);
-        if (lang.equals(Language.FR)) return initFra(input);
+        if (lang.equals(Categorizer.Language.EN)) return initEng(input);
+        if (lang.equals(Categorizer.Language.FR)) return initFra(input);
         return new ArrayList<>();
     }
 
@@ -46,7 +46,7 @@ public class ModelsParent {
         for (String sentence : sentences) {
             System.err.println("\n" + sentence);
             String[] tokens = mTokenizer.tokenize(sentence);
-            Categorizer.CategoryResult catResult = categorizer.getCategory(tokens);
+            Categorizer.CategoryResult catResult = categorizer.getCategory(tokens,Categorizer.Language.EN);
             if (!catResult.isIn(res)) res.add(catResult);
         }
         return res;
@@ -63,13 +63,13 @@ public class ModelsParent {
         for (String sentence : sentences) {
             System.err.println("\n" + sentence);
             String[] tokens = mTokenizer.tokenize(sentence);
-            res.add(categorizer.getCategory(tokens));
+            res.add(categorizer.getCategory(tokens,Categorizer.Language.FR));
         }
         return res;
     }
 
 
-    public enum Language {
-        EN, FR;
+    public enum Language{
+        EN,FR;
     }
 }
