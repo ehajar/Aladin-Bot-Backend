@@ -1,15 +1,19 @@
 package net.thexcoders.aladin_bot_backend.nlp_models;
 
+import net.thexcoders.aladin_bot_backend.models.History;
 import net.thexcoders.aladin_bot_backend.nlp_models.categorizer.Categorizer;
 import net.thexcoders.aladin_bot_backend.nlp_models.sentence.SentenceDetectorEng;
 import net.thexcoders.aladin_bot_backend.nlp_models.tokenizer.TokenizerEng;
-import org.springframework.ui.Model;
+import net.thexcoders.aladin_bot_backend.repositories.HistoryRepository;
 import org.springframework.ui.ModelMap;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ModelsParent {
+
+    private HistoryRepository databaseHelper;
+
     Categorizer.Language lang;
 
     public ModelsParent(Categorizer.Language lang) {
@@ -22,7 +26,8 @@ public class ModelsParent {
         return new ArrayList<>();
     }
 
-    public ModelMap initToModelMap(String input) {
+    public ModelMap initToModelMap(String input, HistoryRepository databaseHelper) {
+        this.databaseHelper = databaseHelper;
         List<Categorizer.CategoryResult> resList = init(input);
         ArrayList<ModelMap> mapList = new ArrayList<>();
         ModelMap res = new ModelMap();
@@ -38,19 +43,21 @@ public class ModelsParent {
 
     private ArrayList<Categorizer.CategoryResult> initEng(String input) {
         ArrayList<Categorizer.CategoryResult> res = new ArrayList<>();
+
         TokenizerEng mTokenizer = new TokenizerEng();
         Categorizer categorizer = Categorizer.getInstance();
         SentenceDetectorEng sentenceDetector = new SentenceDetectorEng();
 
         String[] sentences = sentenceDetector.toSentences(input.toLowerCase());
         for (String sentence : sentences) {
-            if(sentence.toLowerCase().contains("hey")
-            || sentence.toLowerCase().contains("hello")
-            || sentence.toLowerCase().contains("hi")) {
-                res.add(new Categorizer.CategoryResult("greeting",1));
+            if (sentence.toLowerCase().contains("hey")
+                    || sentence.toLowerCase().contains("hello")
+                    || sentence.toLowerCase().contains("hi")) {
+                res.add(new Categorizer.CategoryResult("greeting", 1));
             }
             String[] tokens = mTokenizer.tokenize(sentence);
-            Categorizer.CategoryResult catResult = categorizer.getCategory(tokens,Categorizer.Language.EN);
+            Categorizer.CategoryResult catResult = categorizer.getCategory(tokens, Categorizer.Language.EN);
+            databaseHelper.save(new History(sentence,catResult));
             if (!catResult.isIn(res)) res.add(catResult);
         }
         return res;
@@ -67,13 +74,13 @@ public class ModelsParent {
         for (String sentence : sentences) {
             System.err.println("\n" + sentence);
             String[] tokens = mTokenizer.tokenize(sentence);
-            res.add(categorizer.getCategory(tokens,Categorizer.Language.FR));
+            res.add(categorizer.getCategory(tokens, Categorizer.Language.FR));
         }
         return res;
     }
 
 
-    public enum Language{
-        EN,FR;
+    public enum Language {
+        EN, FR;
     }
 }

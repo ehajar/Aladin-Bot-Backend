@@ -3,6 +3,8 @@ package net.thexcoders.aladin_bot_backend.nlp_models.categorizer;
 import net.thexcoders.aladin_bot_backend.nlp_models.NLPModel;
 import opennlp.tools.doccat.*;
 import opennlp.tools.util.*;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -74,6 +76,7 @@ public class Categorizer extends NLPModel {
         }
     }
 
+
     public CategoryResult getCategory(String[] tokens, Language lang) {
         DocumentCategorizerME categorizerME;
         if (lang.equals(Language.EN)) {
@@ -119,6 +122,14 @@ public class Categorizer extends NLPModel {
                     ", probability=" + probability +
                     ", catCode=" + catCode +
                     '}';
+        }
+
+        public ModelMap toModelMap() {
+            ModelMap res = new ModelMap();
+            res.addAttribute("probability",probability);
+            res.addAttribute("catCode",catCode);
+            res.addAttribute("category",category);
+            return res;
         }
     }
 
