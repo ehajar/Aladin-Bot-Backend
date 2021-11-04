@@ -26,13 +26,26 @@ public class History {
         this.id = COUNTER;
     }
 
-    public ModelMap toModelmap(){
-        ModelMap res= new ModelMap();
-        res.addAttribute("id",id);
-        res.addAttribute("input",input);
-        res.addAttribute("output",output.toModelMap());
+    public ModelMap toModelmap() {
+        ModelMap res = new ModelMap();
+        res.addAttribute("id", id);
+        res.addAttribute("input", input);
+        res.addAttribute("output", output.toModelMap());
 
         return res;
     }
 
+    public void changeState(int s) {
+        switch (s) {
+            case 0:
+                state = HistoryState.VALIDATED.state;
+                break;
+            case 1:
+                state = HistoryState.REJECTED.state;
+                break;
+            case 2:
+                state = HistoryState.WAITING.state;
+                break;
+        }
+    }
 }

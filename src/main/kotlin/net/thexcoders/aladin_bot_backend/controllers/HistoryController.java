@@ -29,5 +29,14 @@ public class HistoryController {
         return res;
     }
 
+    @PostMapping("/state")
+    public void changeState(@RequestBody ModelMap s) {
+        int state = (int) s.getAttribute("state");
+        Integer id = (Integer) s.getAttribute("id");
+        History history = historyRepository.findById(id).get();
+        history.changeState(state);
+        historyRepository.save(history);
+    }
+
 
 }
