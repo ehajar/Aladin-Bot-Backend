@@ -21,7 +21,7 @@ public class Categorizer extends NLPModel {
 
     public enum Language {
         EN("en"), FR("fr");
-        String value;
+        public String value;
 
         Language(String lang) {
             this.value = lang;
@@ -77,7 +77,7 @@ public class Categorizer extends NLPModel {
     }
 
 
-    public CategoryResult getCategory(String[] tokens, Language lang) {
+    public CategoryResult getCategory(String[] tokens, Language lang, String sentence) {
         DocumentCategorizerME categorizerME;
         if (lang.equals(Language.EN)) {
             categorizerME = new DocumentCategorizerME(enModel);
@@ -88,19 +88,21 @@ public class Categorizer extends NLPModel {
         String category = categorizerME.getBestCategory(probabilites);
         System.err.print(category + "\t");
         double probability = probabilites[categorizerME.getIndex(category)];
-        if (probability < 0.1429) return  new CategoryResult("Unknown",probability);
+        if (probability < 0.1429) return  new CategoryResult("Unknown",probability, sentence);
         System.err.println("probability " + probability);
-        return new CategoryResult(category, probability);
+        return new CategoryResult(category, probability,sentence);
     }
 
     public static class CategoryResult {
         public String category;
         public double probability;
         public int catCode;
+        public String input;
 
-        public CategoryResult(String category, double probability) {
+        public CategoryResult(String category, double probability, String input) {
             this.category = category;
             this.probability = probability;
+            this.input = input;
             this.catCode = categoryConverter(category);
         }
 

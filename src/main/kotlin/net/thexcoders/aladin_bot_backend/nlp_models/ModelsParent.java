@@ -1,6 +1,5 @@
 package net.thexcoders.aladin_bot_backend.nlp_models;
 
-import net.thexcoders.aladin_bot_backend.models.History;
 import net.thexcoders.aladin_bot_backend.nlp_models.categorizer.Categorizer;
 import net.thexcoders.aladin_bot_backend.nlp_models.sentence.SentenceDetectorEng;
 import net.thexcoders.aladin_bot_backend.nlp_models.tokenizer.TokenizerEng;
@@ -20,15 +19,28 @@ public class ModelsParent {
         this.lang = lang;
     }
 
-    public List<Categorizer.CategoryResult> init(String input) {
+    public List<Categorizer.CategoryResult> getCategories(String[] input) {
         if (lang.equals(Categorizer.Language.EN)) return initEng(input);
         if (lang.equals(Categorizer.Language.FR)) return initFra(input);
         return new ArrayList<>();
     }
 
+    public String[] toSentences(String input) {
+        if (lang.equals(Categorizer.Language.EN)) {
+            SentenceDetectorEng sentenceDetector = new SentenceDetectorEng();
+            return sentenceDetector.toSentences(input.toLowerCase());
+        }
+        if (lang.equals(Categorizer.Language.FR)) {
+            SentenceDetectorEng sentenceDetector = new SentenceDetectorEng();
+            return sentenceDetector.toSentences(input.toLowerCase());
+        }
+        ;
+        return new String[]{};
+    }
+
     public ModelMap initToModelMap(String input, HistoryRepository databaseHelper) {
         this.databaseHelper = databaseHelper;
-        List<Categorizer.CategoryResult> resList = init(input);
+        List<Categorizer.CategoryResult> resList = getCategories(toSentences(input));
         ArrayList<ModelMap> mapList = new ArrayList<>();
         ModelMap res = new ModelMap();
         for (Categorizer.CategoryResult cat : resList) {
@@ -41,40 +53,37 @@ public class ModelsParent {
         return res;
     }
 
-    private ArrayList<Categorizer.CategoryResult> initEng(String input) {
+    private ArrayList<Categorizer.CategoryResult> initEng(String[] sentences) {
         ArrayList<Categorizer.CategoryResult> res = new ArrayList<>();
 
         TokenizerEng mTokenizer = new TokenizerEng();
         Categorizer categorizer = Categorizer.getInstance();
-        SentenceDetectorEng sentenceDetector = new SentenceDetectorEng();
 
-        String[] sentences = sentenceDetector.toSentences(input.toLowerCase());
         for (String sentence : sentences) {
+            Categorizer.CategoryResult catResult;
             if (sentence.toLowerCase().contains("hey")
                     || sentence.toLowerCase().contains("hello")
                     || sentence.toLowerCase().contains("hi")) {
-                res.add(new Categorizer.CategoryResult("greeting", 1));
+                catResult = new Categorizer.CategoryResult("greeting", 1, sentence);
+            } else {
+                String[] tokens = mTokenizer.tokenize(sentence);
+                catResult = categorizer.getCategory(tokens, Categorizer.Language.EN, sentence);
             }
-            String[] tokens = mTokenizer.tokenize(sentence);
-            Categorizer.CategoryResult catResult = categorizer.getCategory(tokens, Categorizer.Language.EN);
-            databaseHelper.save(new History(sentence,catResult));
             if (!catResult.isIn(res)) res.add(catResult);
         }
         return res;
     }
 
     // TODO : setup French models and french training models
-    private ArrayList<Categorizer.CategoryResult> initFra(String input) {
+    private ArrayList<Categorizer.CategoryResult> initFra(String[] sentences) {
         ArrayList<Categorizer.CategoryResult> res = new ArrayList<>();
         TokenizerEng mTokenizer = new TokenizerEng();
         Categorizer categorizer = Categorizer.getInstance();
-        SentenceDetectorEng sentenceDetector = new SentenceDetectorEng();
 
-        String[] sentences = sentenceDetector.toSentences(input.toLowerCase());
         for (String sentence : sentences) {
             System.err.println("\n" + sentence);
             String[] tokens = mTokenizer.tokenize(sentence);
-            res.add(categorizer.getCategory(tokens, Categorizer.Language.FR));
+            res.add(categorizer.getCategory(tokens, Categorizer.Language.FR, sentence));
         }
         return res;
     }
