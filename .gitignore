@@ -1,5 +1,8 @@
 HELP.md
-target/
+target/classes
+target/generated-sources
+target/generated-test-sources
+target/test-classes
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
@@ -32,4 +35,3 @@ build/
 ### VS Code ###
 .vscode/
 
-/src/main/resources

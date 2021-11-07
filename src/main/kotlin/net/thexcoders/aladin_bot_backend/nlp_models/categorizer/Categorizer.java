@@ -1,138 +1,69 @@
 package net.thexcoders.aladin_bot_backend.nlp_models.categorizer;
 
-import net.thexcoders.aladin_bot_backend.nlp_models.NLPModel;
 import opennlp.tools.doccat.*;
-import opennlp.tools.util.*;
-import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
+import opennlp.tools.util.MarkableFileInputStreamFactory;
+import opennlp.tools.util.ObjectStream;
+import opennlp.tools.util.PlainTextByLineStream;
+import opennlp.tools.util.TrainingParameters;
 
-import java.io.*;
-import java.util.ArrayList;
 
-import static net.thexcoders.aladin_bot_backend.converters.CategoryConverterKt.categoryConverter;
+/**
+ * Categorizer class aims to recognize the category of the sentence based on the training Model used.
+ * The data used to train the model is based on the categories_[lang].txt
+ * The file is dynamic and the admin can download the file, edit and save it back to the ressources folder.
+ */
+public interface Categorizer {
 
-// Singleton class due to the train function
-public class Categorizer extends NLPModel {
-
-    private DoccatModel enModel;
-    private DoccatModel frModel;
-    private Language language;
-    private static Categorizer instance;
-
+    /**
+     * enumeration class with two values {@link Language#EN} and {@link Language#FR}.
+     * Used to pass the Language values in the application especially for the result.
+     */
     public enum Language {
         EN("en"), FR("fr");
-        public String value;
+        public final String languageValue;
 
         Language(String lang) {
-            this.value = lang;
+            this.languageValue = lang;
         }
     }
 
-
-    private Categorizer(Language language) {
-        this.language = language;
-        fileName = "categories_en.txt";
-        this.enModel = train("en");
-        fileName = "categories_fr.txt";
-        this.frModel = train("fr");
+    /**
+     * gets the instance of the class, if the instance is null it calls the constructor to create a new instance
+     *
+     * @return Categorizer the instance of the class.
+     */
+    static CategorizerImpl getInstance() {
+        return null;
     }
 
-    public static Categorizer getInstance(Language language) {
-        if (instance == null) {
-            instance = new Categorizer(language);
-        }
-        return instance;
-    }
-
-    public static Categorizer getInstance() {
-        if (instance == null) {
-            instance = new Categorizer(Language.EN);
-        }
-        return instance;
-    }
-
-    public DoccatModel train(String lang) {
-        try {
-            InputStreamFactory dataIn = new MarkableFileInputStreamFactory(new File(path + "categories_"+lang+".txt"));
-            ObjectStream<String> lineStream =
-                    new PlainTextByLineStream(dataIn, "UTF-8");
-            ObjectStream<DocumentSample> sampleStream = new DocumentSampleStream(lineStream);
-
-            DoccatFactory factory = new DoccatFactory(new FeatureGenerator[]{new BagOfWordsFeatureGenerator()});
-            TrainingParameters params = TrainingParameters.defaultParams();
-            params.put(TrainingParameters.ITERATIONS_PARAM, "500");
-            params.put(TrainingParameters.CUTOFF_PARAM, "0");
-
-            DoccatModel model;
-            model = DocumentCategorizerME.train(lang,
-                    sampleStream, params, factory);
-            return model;
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            return null;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
+    /**
+     * This method takes a lot of time to execute since it prepares the training Model for the categorizer based on the
+     * training Data provided in the {@link CategorizerImpl#CategorizerImpl()} constructor} For optimization purposes, we Have used a singleton
+     *
+     * @param lang a string value representing the language in which the model will be trained.
+     *             It also references the file to be used to train the Model
+     * @return instance of {@link DoccatModel} which is the trained model.
+     * @see ObjectStream
+     * @see DoccatModel
+     * @see TrainingParameters
+     * @see DoccatFactory
+     * @see DocumentSampleStream
+     * @see DocumentSample
+     * @see DocumentCategorizerME
+     * @see MarkableFileInputStreamFactory
+     * @see PlainTextByLineStream
+     */
+    public DoccatModel train(String lang);
 
 
-    public CategoryResult getCategory(String[] tokens, Language lang, String sentence) {
-        DocumentCategorizerME categorizerME;
-        if (lang.equals(Language.EN)) {
-            categorizerME = new DocumentCategorizerME(enModel);
-        } else {
-            categorizerME = new DocumentCategorizerME(frModel);
-        }
-        double[] probabilites = categorizerME.categorize(tokens);
-        String category = categorizerME.getBestCategory(probabilites);
-        System.err.print(category + "\t");
-        double probability = probabilites[categorizerME.getIndex(category)];
-        if (probability < 0.1429) return  new CategoryResult("Unknown",probability, sentence);
-        System.err.println("probability " + probability);
-        return new CategoryResult(category, probability,sentence);
-    }
-
-    public static class CategoryResult {
-        public String category;
-        public double probability;
-        public int catCode;
-        public String input;
-
-        public CategoryResult(String category, double probability, String input) {
-            this.category = category;
-            this.probability = probability;
-            this.input = input;
-            this.catCode = categoryConverter(category);
-        }
-
-        public boolean isEqual(CategoryResult res) {
-            return this.catCode == res.catCode;
-        }
-
-        public boolean isIn(ArrayList<CategoryResult> list) {
-            for (CategoryResult res : list) {
-                if (isEqual(res)) return true;
-            }
-            return false;
-        }
-
-        @Override
-        public String toString() {
-            return "CategoryResult{" +
-                    "category='" + category + '\'' +
-                    ", probability=" + probability +
-                    ", catCode=" + catCode +
-                    '}';
-        }
-
-        public ModelMap toModelMap() {
-            ModelMap res = new ModelMap();
-            res.addAttribute("probability",probability);
-            res.addAttribute("catCode",catCode);
-            res.addAttribute("category",category);
-            return res;
-        }
-    }
+    /**
+     * this method is used to get the category of the tokenized sentence using the {@link net.thexcoders.aladin_bot_backend.nlp_models.tokenizer.TokenizerEng Tokenizer} class.
+     *
+     * @param tokens   an array of tokens retrieved from the tokenizer
+     * @param lang     the {@link Language} in which the tokens are in
+     * @param sentence the sentenced (a single sentence from the user's input) from which the tokens are retrieved.
+     * @return an instance of {@link CategorizerImpl.CategoryResult} representing the result to be displayed to the user.
+     */
+    public CategorizerImpl.CategoryResult getCategory(String[] tokens, Language lang, String sentence);
 
 }

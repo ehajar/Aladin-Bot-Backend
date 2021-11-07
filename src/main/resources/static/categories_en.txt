@@ -1,0 +1,7 @@
+greeting     hi. hello. how are you? hey. how is it going? good morning. good evening. good afternoon. peace.
+conv-end     bye bye. cya. goodbye. take care. ciao. see ya. see you later.
+emergency    contacts. phone number. police. ambulance. what's the phone number of. how can i contact. firefighter. firefighters. sick. hospital.
+create-data  who made you? who created you? creator. maker. makers. creators. coders. coder who coded you?
+time-data    what time is it? what's the time? now. time now. watch.
+best-place   what's the best city to visit? what ist the most beautiful city in morocco? what is the nicest place to see? what's the most liked place in morocco? what city do you suggest for me to visit? what's the most wowing city in morocco?
+best-food    what's the best food in morocco? what's the best meal in morocco? what's the most delicious food in morocco? what can i eat? what's your best food suggestion? suggest the best food to eat? anything to eat in Morocco?

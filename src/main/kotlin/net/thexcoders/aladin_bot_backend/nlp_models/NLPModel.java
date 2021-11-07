@@ -1,14 +1,13 @@
 package net.thexcoders.aladin_bot_backend.nlp_models;
 
 import java.io.File;
-import java.io.IOException;
 
 public abstract class NLPModel {
-    protected final String path = "src/main/resources/";
+    protected static final String PATH = "src/main/resources/";
     protected String fileName;
 
     public boolean testFile(String fileName){
-        File file = new File(path+fileName);
+        File file = new File(PATH +fileName);
         return file.exists();
     }
 
@@ -17,7 +16,7 @@ public abstract class NLPModel {
     }
 
     public File generateFile(){
-        return new File(path+fileName);
+        return new File(PATH +fileName);
     }
 
 }

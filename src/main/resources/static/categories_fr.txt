@@ -1,0 +1,7 @@
+greeting     salut bonjour. Comment allez-vous? Hey. Comment ça se passe? Bonjour. bonne soirée. bonne après-midi. paix.
+conv-end     bye bye. cya. Au revoir. prends soin. ciao. à plus. A plus tard.
+emergency    contact d'urgence. numéro de téléphone. police. ambulance. quel est le numéro de téléphone de. comment puis-je contacter. sapeur pompier. sapeurs pompiers. malade. hôpital.
+create-data  qui vous a fait? qui t'a créé ? créateur. fabricant. fabricants. créateurs. codeurs. codeur qui vous a codé ?
+time-data    quelle heure est-il ? quelle heure est-il? maintenant. c'est l'heure. Regardez.
+best-place   quelle est la meilleure ville à visiter? quelle est la plus belle ville du maroc ? quel est le plus bel endroit à voir ? quel est l'endroit le plus apprécié au maroc ? quelle ville me proposez-vous de visiter? quelle est la ville la plus impressionnante du maroc ?Où est le meilleur endroit au Maroc ? quel est le meilleur endroit au maroc?
+best-food    quelle est la meilleure nourriture au maroc ? quel est le meilleur repas au maroc ? quel est le plat le plus délicieux du maroc ? que puis-je manger? quelle est votre meilleure suggestion de nourriture? suggérer la meilleure nourriture à manger?

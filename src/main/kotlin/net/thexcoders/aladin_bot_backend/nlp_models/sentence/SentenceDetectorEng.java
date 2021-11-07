@@ -1,30 +1,13 @@
 package net.thexcoders.aladin_bot_backend.nlp_models.sentence;
 
-import net.thexcoders.aladin_bot_backend.nlp_models.NLPModel;
-import opennlp.tools.sentdetect.SentenceDetectorME;
-import opennlp.tools.sentdetect.SentenceModel;
+/**
+ * This class is used to split the user input into the sentences
+ */
+public interface SentenceDetectorEng {
 
-import java.io.File;
-import java.io.IOException;
-
-public class SentenceDetectorEng extends NLPModel {
-    SentenceModel model;
-
-    public SentenceDetectorEng() {
-        fileName = "en-sentence.bin";
-        init();
-    }
-
-    private void init() {
-        File file = new File(path + fileName);
-        try {
-            model = new SentenceModel(file);
-        } catch (IOException ignored) {
-        }
-    }
-
-    public String[] toSentences(String message){
-        SentenceDetectorME sentenceDetectorME = new SentenceDetectorME(model);
-        return sentenceDetectorME.sentDetect(message);
-    }
+    /**
+     * @param message a String with the value of the user input
+     * @return Array of Strings containing all the sentences retrieved form the user Input.
+     */
+    String[] toSentences(String message);
 }
