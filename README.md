@@ -1,18 +1,14 @@
 # Aladin-Bot
 
-<img src="https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white"/>
-<img src="https://img.shields.io/badge/-Java-06305b?style=for-the-badge&logo=java&logoColor=white">
-<img src="https://img.shields.io/badge/MongoDB-%234ea94b.svg?&style=for-the-badge&logo=mongodb&logoColor=white">
-<img src="https://img.shields.io/badge/kotlin-%230095D5.svg?style=for-the-badge&logo=kotlin&logoColor=white">
-<img src="https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white">
-<img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white">
-<img src="https://img.shields.io/badge/jira-%230A0FFF.svg?style=for-the-badge&logo=jira&logoColor=white">
-<img src="https://img.shields.io/badge/Trello-%23026AA7.svg?style=for-the-badge&logo=Trello&logoColor=white">
-<img src="https://img.shields.io/badge/Sonar%20Lint-a50034.svg?style=for-the-badge&logoColor=white">
-<img src="https://img.shields.io/badge/Metrics%20Tree-%23F5010C.svg?style=for-the-badge&logoColor=white">
-<img src="https://img.shields.io/badge/code%20Together-%23092E20.svg?style=for-the-badge&logoColor=white">
-<img src="https://img.shields.io/badge/eXtreme%20Programming-1C1E24?style=for-the-badge&logoColor=#D04A37">
+<img src="https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white"/> <img src="https://img.shields.io/badge/-Java-06305b?style=for-the-badge&logo=java&logoColor=white"> <img src="https://img.shields.io/badge/MongoDB-%234ea94b.svg?&style=for-the-badge&logo=mongodb&logoColor=white"> <img src="https://img.shields.io/badge/kotlin-%230095D5.svg?style=for-the-badge&logo=kotlin&logoColor=white"> <img src="https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white"> <img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white"> <img src="https://img.shields.io/badge/jira-%230A0FFF.svg?style=for-the-badge&logo=jira&logoColor=white"> <img src="https://img.shields.io/badge/Trello-%23026AA7.svg?style=for-the-badge&logo=Trello&logoColor=white"> <img src="https://img.shields.io/badge/Sonar%20Lint-a50034.svg?style=for-the-badge&logoColor=white"> <img src="https://img.shields.io/badge/Metrics%20Tree-%23F5010C.svg?style=for-the-badge&logoColor=white"> <img src="https://img.shields.io/badge/code%20Together-%23092E20.svg?style=for-the-badge&logoColor=white"> <img src="https://img.shields.io/badge/eXtreme%20Programming-1C1E24?style=for-the-badge&logoColor=#D04A37">
 
+## Deployment:
+- BACKEND  => NETLIFY
+- DATABASE => MONGO ATLAS
+
+## Documentation
+
+The documentation can be found [HERE](https://ehajar.github.io/Aladin-Bot-Backend)
 
 ## Project Description:
 
