@@ -1,6 +1,5 @@
 package net.thexcoders.aladin_bot_backend.nlp_models.categorizer;
 
-import lombok.Setter;
 import net.thexcoders.aladin_bot_backend.nlp_models.NLPModel;
 import opennlp.tools.doccat.*;
 import opennlp.tools.util.*;

@@ -7,7 +7,7 @@ import opennlp.tools.sentdetect.SentenceModel;
 import java.io.File;
 import java.io.IOException;
 
-public class SentenceDetectorImplEng extends NLPModel implements SentenceDetectorEng {
+public class SentenceDetectorImplEng extends NLPModel implements SentenceDetector {
     SentenceModel model;
 
     public SentenceDetectorImplEng() {

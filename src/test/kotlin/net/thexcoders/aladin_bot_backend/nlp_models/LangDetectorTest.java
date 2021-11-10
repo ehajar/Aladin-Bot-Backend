@@ -5,8 +5,6 @@ import net.thexcoders.aladin_bot_backend.nlp_models.language.LangDetectorImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static net.thexcoders.aladin_bot_backend.converters.LangConverter.*;
-import static net.thexcoders.aladin_bot_backend.converters.LangConverter.langToCodeConverter;
 import static org.junit.jupiter.api.Assertions.*;
 
 class LangDetectorTest {
@@ -17,17 +15,21 @@ class LangDetectorTest {
     }
 
     @Test
-    void detectLang() {
-        assertEquals("fra",detector.detectLang("Bonjour Comment allez vous ce soir?"));
-        assertEquals("eng",detector.detectLang("Hello, How are you doing tonight?"));
-        assertEquals("ara",detector.detectLang("مرحبا كيف حالك الليلة؟"));
+    void frenchDetector() {
+        assertEquals("fra",detector.detectLang("Bonsoir, Comment allez vous ce soir?"));
+        assertEquals("fra",detector.detectLang("Bonjour, j'ai faim et je veux manger"));
+        assertEquals("fra",detector.detectLang("quelle est la plus belle ville au Maroc."));
     }
-
     @Test
-    void testConverter(){
-        assertEquals(AR, langToCodeConverter("ara"));
-        assertEquals(FR, langToCodeConverter("fra"));
-        assertEquals(EN, langToCodeConverter("eng"));
-        assertEquals(UNKNOWN, langToCodeConverter("ita"));
+    void englishDetector() {
+        assertEquals("eng",detector.detectLang("Hello, How are you doing tonight?"));
+        assertEquals("eng",detector.detectLang("Hi. I am so hungry and I want to eat something nice tonight"));
+        assertEquals("eng",detector.detectLang("What is the most beautiful city of Morocco"));
+    }
+    @Test
+    void arabicDetector() {
+        assertEquals("ara",detector.detectLang("مرحبا كيف حالك الليلة؟"));
+        assertEquals("ara",detector.detectLang("أهلا. أنا جائع وأريد أن آكل؟"));
+        assertEquals("ara",detector.detectLang("أهلا. ما هي اجمل مدينة في المغرب؟"));
     }
 }

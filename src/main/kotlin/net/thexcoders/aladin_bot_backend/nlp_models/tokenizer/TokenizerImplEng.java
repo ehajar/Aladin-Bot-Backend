@@ -12,7 +12,7 @@ import java.io.IOException;
  * The Tokenizer splits each sentence into an array of tokens that will be used to get the associated Category
  * It is highly linked to {@link CategorizerImpl Categorizer}
  * */
-public class TokenizerImplEng extends NLPModel implements TokenizerEng {
+public class TokenizerImplEng extends NLPModel implements Tokenizer {
     TokenizerModel model ;
 
     public TokenizerImplEng(){

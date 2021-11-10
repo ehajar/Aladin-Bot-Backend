@@ -3,10 +3,10 @@ package net.thexcoders.aladin_bot_backend.nlp_models;
 import net.thexcoders.aladin_bot_backend.nlp_models.categorizer.Categorizer;
 import net.thexcoders.aladin_bot_backend.nlp_models.categorizer.CategorizerImpl;
 import net.thexcoders.aladin_bot_backend.nlp_models.categorizer.CategoryResultImpl;
-import net.thexcoders.aladin_bot_backend.nlp_models.sentence.SentenceDetectorEng;
+import net.thexcoders.aladin_bot_backend.nlp_models.sentence.SentenceDetector;
 import net.thexcoders.aladin_bot_backend.nlp_models.sentence.SentenceDetectorImplEng;
 import net.thexcoders.aladin_bot_backend.nlp_models.sentence.SentenceDetectorImplFra;
-import net.thexcoders.aladin_bot_backend.nlp_models.tokenizer.TokenizerEng;
+import net.thexcoders.aladin_bot_backend.nlp_models.tokenizer.Tokenizer;
 import net.thexcoders.aladin_bot_backend.nlp_models.tokenizer.TokenizerImplEng;
 import net.thexcoders.aladin_bot_backend.nlp_models.tokenizer.TokenizerImplFra;
 
@@ -29,7 +29,7 @@ public class ModelsOrchestrerImpl implements ModelsOrchestrer {
 
     public String[] toSentences(String input) {
         if (lang.equals(CategorizerImpl.Language.EN)) {
-            SentenceDetectorEng sentenceDetector = new SentenceDetectorImplEng();
+            SentenceDetector sentenceDetector = new SentenceDetectorImplEng();
             return sentenceDetector.toSentences(input.toLowerCase());
         }
         if (lang.equals(CategorizerImpl.Language.FR)) {
@@ -42,7 +42,7 @@ public class ModelsOrchestrerImpl implements ModelsOrchestrer {
     private ArrayList<CategorizerImpl.CategoryResult> initEng(String[] sentences) {
         ArrayList<CategorizerImpl.CategoryResult> res = new ArrayList<>();
 
-        TokenizerEng mTokenizer = new TokenizerImplEng();
+        Tokenizer mTokenizer = new TokenizerImplEng();
         CategorizerImpl categorizer = CategorizerImpl.getInstance();
 
         for (String sentence : sentences) {
@@ -62,7 +62,7 @@ public class ModelsOrchestrerImpl implements ModelsOrchestrer {
 
     private ArrayList<CategorizerImpl.CategoryResult> initFra(String[] sentences) {
         ArrayList<CategorizerImpl.CategoryResult> res = new ArrayList<>();
-        TokenizerEng mTokenizer = new TokenizerImplFra();
+        Tokenizer mTokenizer = new TokenizerImplFra();
         CategorizerImpl categorizer = CategorizerImpl.getInstance();
 
         for (String sentence : sentences) {

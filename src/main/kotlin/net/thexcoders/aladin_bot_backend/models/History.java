@@ -3,7 +3,6 @@ package net.thexcoders.aladin_bot_backend.models;
 
 import jdk.jfr.Timestamp;
 import lombok.Setter;
-import net.thexcoders.aladin_bot_backend.helper_classes.HistoryState;
 import net.thexcoders.aladin_bot_backend.nlp_models.categorizer.CategorizerImpl;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
@@ -14,11 +13,12 @@ import java.util.Date;
 
 /**
  * History Model to store the History of the transactions between the client and the bot to be used later to feed and improve the accuracy of the training Model.
+ *
  * @see CategorizerImpl.CategoryResult
- * @see HistoryState
  * @see Date
  * @see ModelMap
- * * */
+ * *
+ */
 @Document(collection = "History")
 @Setter
 public class History {
@@ -28,6 +28,12 @@ public class History {
     public static final String FR = "fr";
     @Transient
     public static final String EN = "en";
+    @Transient
+    public static final String VALIDATED = "valid";
+    @Transient
+    public static final String REJECTED = "rejected";
+    @Transient
+    public static final String WAITING = "waiting";
 
 
     @Id
@@ -35,17 +41,18 @@ public class History {
     private String input;
     private String lang;
     private CategorizerImpl.CategoryResult output;
-    private String state = HistoryState.WAITING.stateValue;
+    private String state = WAITING;
     @Timestamp
     private Date created_at = new Date();
 
 
     /**
      * History Model Constructor
-     * @param input a String representing the user Input
+     *
+     * @param input  a String representing the user Input
      * @param output the CategoryResult instance that represents the output of the bot
-     * @param lang A string representing the language in which the communication has been done.
-     * */
+     * @param lang   A string representing the language in which the communication has been done.
+     */
     public History(String input, CategorizerImpl.CategoryResult output, String lang) {
         this.input = input;
         this.output = output;
@@ -54,7 +61,7 @@ public class History {
 
     /**
      * Generating a ModelMap instance using the instance attributes.
-     * */
+     */
     public ModelMap toModelmap() {
         ModelMap res = new ModelMap();
         res.addAttribute("id", id);
@@ -68,20 +75,19 @@ public class History {
 
     /**
      * Change the state of the instance of History based in the state entered as a Parameter
-     * @param state Integer referring to the target state to change the value to
      *
-     * @see HistoryState
-     * */
+     * @param state Integer referring to the target state to change the value to
+     */
     public void changeState(int state) {
         switch (state) {
             case 0:
-                this.state = HistoryState.VALIDATED.stateValue;
+                this.state = VALIDATED;
                 break;
             case 1:
-                this.state = HistoryState.REJECTED.stateValue;
+                this.state = REJECTED;
                 break;
             default:
-                this.state = HistoryState.WAITING.stateValue;
+                this.state = WAITING;
         }
     }
 }

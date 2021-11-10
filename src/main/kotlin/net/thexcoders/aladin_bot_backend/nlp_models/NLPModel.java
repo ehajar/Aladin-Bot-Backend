@@ -6,7 +6,7 @@ public abstract class NLPModel {
     protected static final String PATH = "src/main/resources/";
     protected String fileName;
 
-    public boolean testFile(String fileName){
+    private boolean testFile(String fileName){
         File file = new File(PATH +fileName);
         return file.exists();
     }

@@ -1,59 +1,57 @@
 package net.thexcoders.aladin_bot_backend.nlp_models;
 
+import net.thexcoders.aladin_bot_backend.converters.CategoryConverter;
+import net.thexcoders.aladin_bot_backend.nlp_models.categorizer.Categorizer;
 import net.thexcoders.aladin_bot_backend.nlp_models.categorizer.CategorizerImpl;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ModelsOrchestrerTest {
-    static ModelsOrchestrer parent;
+    static ModelsOrchestrerImpl modelsOrchestrer;
 
     @BeforeEach
     void setUp() {
-        parent = new ModelsOrchestrerImpl(CategorizerImpl.Language.EN);
+        modelsOrchestrer = new ModelsOrchestrerImpl(CategorizerImpl.Language.EN);
     }
 
-   /* @Test
+    @Test
     void greetingsTest() {
-        List<Categorizer.CategoryResult> results = parent.init("hello");
-        assertEquals(CategoryConverterKt.GREETINGS, results.get(0).catCode);
+        List<CategorizerImpl.CategoryResult> results = modelsOrchestrer.getCategories(new String[]{"hello"});
+        assertEquals(CategoryConverter.GREETINGS, results.get(0).getCatCode());
 
-        results = parent.init("Hey");
-        assertEquals(CategoryConverterKt.GREETINGS, results.get(0).catCode);
+        results = modelsOrchestrer.getCategories(new String[]{"Hey"});
+        assertEquals(CategoryConverter.GREETINGS, results.get(0).getCatCode());
 
-        results = parent.init("Hi");
-        assertEquals(CategoryConverterKt.GREETINGS, results.get(0).catCode);
-
-        results = parent.init("How are you");
-        assertEquals(CategoryConverterKt.GREETINGS, results.get(0).catCode);
+        results = modelsOrchestrer.getCategories(new String[]{"Hi"});
+        assertEquals(CategoryConverter.GREETINGS, results.get(0).getCatCode());
     }
 
     @Test
     void bestPlaceTest() {
-        List<Categorizer.CategoryResult> results = parent.init("What's the best place in Morocco to visit");
-        assertEquals(CategoryConverterKt.BEST_PLACE, results.get(0).catCode);
+        List<CategorizerImpl.CategoryResult> results = modelsOrchestrer.getCategories(new String[]{"what's the best city to visit?"});
+        assertEquals(CategoryConverter.BEST_PLACE, results.get(0).getCatCode());
 
-        *//*results = parent.init("what is the best place in Morocco"); // hadi li failed dial bare7
-        assertEquals(CategoryConverterKt.BEST_PLACE, results.get(0).catCode);*//*
-
-        results = parent.init("any place to eat in Morocco?");
-        assertEquals(CategoryConverterKt.BEST_PLACE, results.get(0).catCode);
+        results = modelsOrchestrer.getCategories(new String[]{"what is the nicest place to see?"});
+        assertEquals(CategoryConverter.BEST_PLACE, results.get(0).getCatCode());
 
     }
 
     @Test
     void bestFoodTest() {
-        List<Categorizer.CategoryResult> results = parent.init("What's the best food in Moroooccco?");
-        assertEquals(CategoryConverterKt.BEST_FOOD, results.get(0).catCode);
+        List<CategorizerImpl.CategoryResult> results = modelsOrchestrer.getCategories(new String[]{"What's the best food in Moroooccco?"});
+        assertEquals(CategoryConverter.BEST_FOOD, results.get(0).getCatCode());
 
-        results = parent.init("What's the best fooood in Moroooccco?");
-        assertEquals(CategoryConverterKt.BEST_FOOD, results.get(0).catCode);
+        results = modelsOrchestrer.getCategories(new String[]{"What's the best fooood in Moroooccco?"});
+        assertEquals(CategoryConverter.BEST_FOOD, results.get(0).getCatCode());
 
-        results = parent.init("any good food in Morocco?");
-        assertEquals(CategoryConverterKt.BEST_FOOD, results.get(0).catCode);
+        results = modelsOrchestrer.getCategories(new String[]{"any good food in Morocco?"});
+        assertEquals(CategoryConverter.BEST_FOOD, results.get(0).getCatCode());
 
-        results = parent.init("anything to eat in Morocco?");
-        assertEquals(CategoryConverterKt.BEST_FOOD, results.get(0).catCode);
 
     }
-*/
 
 }

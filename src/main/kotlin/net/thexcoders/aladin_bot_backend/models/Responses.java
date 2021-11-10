@@ -2,7 +2,6 @@ package net.thexcoders.aladin_bot_backend.models;
 
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.ui.ModelMap;
 

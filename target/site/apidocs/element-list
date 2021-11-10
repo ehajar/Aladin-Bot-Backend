@@ -1,6 +1,5 @@
 net.thexcoders.aladin_bot_backend.controllers
 net.thexcoders.aladin_bot_backend.converters
-net.thexcoders.aladin_bot_backend.helper_classes
 net.thexcoders.aladin_bot_backend.models
 net.thexcoders.aladin_bot_backend.nlp_models
 net.thexcoders.aladin_bot_backend.nlp_models.categorizer

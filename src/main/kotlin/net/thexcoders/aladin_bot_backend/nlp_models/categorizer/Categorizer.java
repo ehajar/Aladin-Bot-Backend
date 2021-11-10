@@ -1,5 +1,6 @@
 package net.thexcoders.aladin_bot_backend.nlp_models.categorizer;
 
+import net.thexcoders.aladin_bot_backend.nlp_models.tokenizer.Tokenizer;
 import opennlp.tools.doccat.*;
 import opennlp.tools.util.MarkableFileInputStreamFactory;
 import opennlp.tools.util.ObjectStream;
@@ -57,7 +58,7 @@ public interface Categorizer {
 
 
     /**
-     * this method is used to get the category of the tokenized sentence using the {@link net.thexcoders.aladin_bot_backend.nlp_models.tokenizer.TokenizerEng Tokenizer} class.
+     * this method is used to get the category of the tokenized sentence using the {@link Tokenizer Tokenizer} class.
      *
      * @param tokens   an array of tokens retrieved from the tokenizer
      * @param lang     the {@link Language} in which the tokens are in

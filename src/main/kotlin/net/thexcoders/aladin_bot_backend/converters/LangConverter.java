@@ -1,7 +1,6 @@
 package net.thexcoders.aladin_bot_backend.converters;
 
 import net.thexcoders.aladin_bot_backend.nlp_models.categorizer.Categorizer;
-import net.thexcoders.aladin_bot_backend.nlp_models.categorizer.CategorizerImpl;
 
 public class LangConverter {
 

@@ -10,7 +10,7 @@
     </parent>
     <groupId>net.thexcoders</groupId>
     <artifactId>Aladin-Bot-Back-end</artifactId>
-    <version>0.2.3</version>
+    <version>0.2.4</version>
     <name>Aladin-bot-back-end</name>
     <description>Back end for the Aladin-Bot web application</description>
     <developers>
