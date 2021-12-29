@@ -42,7 +42,10 @@ public class LangDetectorImpl extends NLPModel implements LangDetector {
     public String detectLang(String input) {
         LanguageDetector lang = new LanguageDetectorME(model);
         Language bestLanguage = lang.predictLanguage(input);
-        System.err.println("Language :" + bestLanguage.getLang() + "\tprecision: " + bestLanguage.getConfidence());
+        System.err.println("Language :" +
+                bestLanguage.getLang() +
+                "\tprecision: " +
+                bestLanguage.getConfidence());
         return bestLanguage.getLang();
     }
 

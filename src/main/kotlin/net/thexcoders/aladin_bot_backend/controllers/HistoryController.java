@@ -101,6 +101,7 @@ public class HistoryController {
             FileWriter file = new FileWriter(path);
             file.write(content);
             file.close();
+            CategorizerImpl.modelChanged();
             return true;
         } catch (IOException e) {
             return false;

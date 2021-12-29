@@ -1,0 +1,5 @@
+net\thexcoders\aladin_bot_backend\converters\langConverterTest.class
+net\thexcoders\aladin_bot_backend\nlp_models\ModelsOrchestrerTest.class
+net\thexcoders\aladin_bot_backend\nlp_models\NLPModelsTest.class
+net\thexcoders\aladin_bot_backend\nlp_models\LangDetectorTest.class
+net\thexcoders\aladin_bot_backend\converters\CategoryConverterTest.class

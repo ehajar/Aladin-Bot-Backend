@@ -1,5 +1,5 @@
 greeting     salut. bonsoir. bonjour. Comment allez-vous? Salut. Comment ça se passe? Bonjour. bonne soirée. bonne après-midi.
-conv-end     bye bye. cya. Au revoir. prends soin. ciao. à plus. A plus tard.
+conv-end     bye. cya. Au revoir. prends soin. ciao. à plus. A plus tard.
 emergency    contact d'urgence. numéro de téléphone. police. ambulance. quel est le numéro de téléphone de. comment puis-je contacter. sapeur pompier. sapeurs pompiers. malade. hôpital.
 create-data  qui vous a fait? qui t'a créé ? créateur. fabricant. fabricants. créateurs. codeurs. codeur qui vous a codé ?
 time-data    quelle heure est-il ? quelle heure est-il? maintenant. c'est l'heure. Regardez.

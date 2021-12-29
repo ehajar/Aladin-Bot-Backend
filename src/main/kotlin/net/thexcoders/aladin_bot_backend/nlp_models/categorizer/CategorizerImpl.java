@@ -14,6 +14,7 @@ import static net.thexcoders.aladin_bot_backend.converters.CategoryConverter.cat
 public class CategorizerImpl extends NLPModel implements Categorizer {
     private static final double MIN_ACCEPTED_VALUE = 0.1429;
 
+    private static boolean isModelChanged = true;
     private final DoccatModel enModel;
     private final DoccatModel frModel;
     private static CategorizerImpl instance;
@@ -33,7 +34,7 @@ public class CategorizerImpl extends NLPModel implements Categorizer {
     }
 
     public static CategorizerImpl getInstance() {
-        if (instance == null) {
+        if (instance == null || isModelChanged) {
             instance = new CategorizerImpl();
         }
         return instance;
@@ -41,13 +42,18 @@ public class CategorizerImpl extends NLPModel implements Categorizer {
 
     @Override
     public DoccatModel train(String lang) {
+        isModelChanged = false;
         try {
-            InputStreamFactory dataIn = new MarkableFileInputStreamFactory(new File(PATH + "categories_" + lang + ".txt"));
+            InputStreamFactory dataIn = new MarkableFileInputStreamFactory(
+                    new File(PATH + "categories_" + lang + ".txt")
+            );
             ObjectStream<String> lineStream =
                     new PlainTextByLineStream(dataIn, "UTF-8");
             ObjectStream<DocumentSample> sampleStream = new DocumentSampleStream(lineStream);
 
-            DoccatFactory factory = new DoccatFactory(new FeatureGenerator[]{new BagOfWordsFeatureGenerator()});
+            DoccatFactory factory = new DoccatFactory(
+                    new FeatureGenerator[]{new BagOfWordsFeatureGenerator()}
+            );
             TrainingParameters params = TrainingParameters.defaultParams();
             params.put(TrainingParameters.ITERATIONS_PARAM, "500");
             params.put(TrainingParameters.CUTOFF_PARAM, "0");
@@ -79,8 +85,13 @@ public class CategorizerImpl extends NLPModel implements Categorizer {
         System.err.println(category + "\t" + "probability " + probability);
 
         // if probability is below the default value return Unknown
-        if (probability < MIN_ACCEPTED_VALUE) return new CategoryResultImpl("Unknown", probability, sentence);
+        if (probability < MIN_ACCEPTED_VALUE)
+            return new CategoryResultImpl("Unknown", probability, sentence);
         return new CategoryResultImpl(category, probability, sentence);
+    }
+
+    public static void modelChanged(){
+        isModelChanged = true;
     }
 
     /**

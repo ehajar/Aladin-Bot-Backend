@@ -1,9 +1,0 @@
-net.thexcoders.aladin_bot_backend.controllers
-net.thexcoders.aladin_bot_backend.converters
-net.thexcoders.aladin_bot_backend.models
-net.thexcoders.aladin_bot_backend.nlp_models
-net.thexcoders.aladin_bot_backend.nlp_models.categorizer
-net.thexcoders.aladin_bot_backend.nlp_models.language
-net.thexcoders.aladin_bot_backend.nlp_models.sentence
-net.thexcoders.aladin_bot_backend.nlp_models.tokenizer
-net.thexcoders.aladin_bot_backend.repositories

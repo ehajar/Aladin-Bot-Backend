@@ -39,65 +39,55 @@ provided to bring this project to life in the best way possible.
 | src
 |___ main
 |    |___kotlin
-|    |    |___net
-|    |        |___thexcoders
-|    |            |___aladin_bot_backend
-|    |                |___controllers
-|    |                |    |   [Controller 1]
-|    |                |    |   [Controller 2]
-|    |                |    |   [Controller 3]
-|    |                |    |   ...
-|    |                |
-|    |                |___converters
-|    |                |    |   [Converter 1]
-|    |                |    |   [Converter 2]
-|    |                |    |   [Converter 3]
-|    |                |    |   ...
-|    |                |
-|    |                |___helper_classes
-|    |                |    |   [Helper 1]
-|    |                |    |   [Helper 2]
-|    |                |    |   [Helper 3]
-|    |                |    |   ...
-|    |                |
-|    |                |___models
-|    |                |    |   [Model 1]
-|    |                |    |   [Model 2]
-|    |                |    |   [Model 3]
-|    |                |    |   ...
-|    |                |
-|    |                |___nlp_models
-|    |                |    |   [NlpModel 1]
-|    |                |    |   [NlpModel 2]
-|    |                |    |   [NlpModel 3]
-|    |                |    |   ...
-|    |                |
-|    |                |___repositories
-|    |                |    |   [Repo 1]
-|    |                |    |   [Repo 2]
-|    |                |    |   [Repo 3]
-|    |                |    |   ...
-|    |                |   
-|    |                |     AladinBotBackEndApplication.kt (MAIN)
+|    |    |___net.thexcodders.aladin_bot_backend
+|    |    |    |___controllers
+|    |    |    |    |   [Controller 1]
+|    |    |    |    |   [Controller 2]
+|    |    |    |    |   [Controller 3]
+|    |    |    |    |   ...
+|    |    |    |
+|    |    |    |___converters
+|    |    |    |    |   [Converter 1]
+|    |    |    |    |   [Converter 2]
+|    |    |    |    |   [Converter 3]
+|    |    |    |    |   ...
+|    |    |    |
+|    |    |    |___models
+|    |    |    |    |   [Model 1]
+|    |    |    |    |   [Model 2]
+|    |    |    |    |   [Model 3]
+|    |    |    |    |   ...
+|    |    |    |
+|    |    |    |___nlp_models
+|    |    |    |    |   [NlpModel 1]
+|    |    |    |    |   [NlpModel 2]
+|    |    |    |    |   [NlpModel 3]
+|    |    |    |    |   ...
+|    |    |    |
+|    |    |    |___repositories
+|    |    |    |    |   [Repo 1]
+|    |    |    |    |   [Repo 2]
+|    |    |    |    |   [Repo 3]
+|    |    |    |    |   ...
+|    |    |    |   
+|    |    |    AladinBotBackEndApplication.kt (MAIN)
 |    |___ressources
-|        |   [NLP MODEL 1]
-|        |   [NLP MODEL 2]
-|        |   [NLP MODEL 3]
-|        |   ...
+|    |    |   [NLP MODEL 1]
+|    |    |   [NLP MODEL 2]
+|    |    |   [NLP MODEL 3]
+|    |    |   ...
 |___ test
 |    |___kotlin
-|            |___net
-|                |___thexcoders
-|                    |___aladin_bot_backend
-|                        |___converters
-|                        |    |   [Converter 1]
-|                        |    |   [Converter 2]
-|                        |    |   [Converter 3]
-|                        |    |   ...
-|                        |
-|                        |___nlp_models
-|                        |    |   [NlpModel 1]
-|                        |    |   [NlpModel 2]
-|                        |    |   [NlpModel 3]
-|                        |    |   ...
+|    |    |___net.thexcodders.aladin_bot_backend
+|    |    |    |___converters
+|    |    |    |    |   [Converter 1]
+|    |    |    |    |   [Converter 2]
+|    |    |    |    |   [Converter 3]
+|    |    |    |    |   ...
+|    |    |    |
+|    |    |    |___nlp_models
+|    |    |    |    |   [NlpModel 1]
+|    |    |    |    |   [NlpModel 2]
+|    |    |    |    |   [NlpModel 3]
+|    |    |    |    |   ...
 ```

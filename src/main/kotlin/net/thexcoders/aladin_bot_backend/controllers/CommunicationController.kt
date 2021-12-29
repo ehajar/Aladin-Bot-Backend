@@ -60,7 +60,6 @@ class CommunicationController {
             historyRepository.save(History(x.input, x, languageStr.languageValue))
         }
         return res
-
     }
 
     /**
