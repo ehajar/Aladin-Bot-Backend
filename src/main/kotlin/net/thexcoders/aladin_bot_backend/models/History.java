@@ -1,9 +1,10 @@
 package net.thexcoders.aladin_bot_backend.models;
 
 
-import jdk.jfr.Timestamp;
 import lombok.Setter;
 import net.thexcoders.aladin_bot_backend.nlp_models.categorizer.CategorizerImpl;
+import org.jetbrains.annotations.TestOnly;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -42,7 +43,7 @@ public class History {
     private String lang;
     private CategorizerImpl.CategoryResult output;
     private String state = WAITING;
-    @Timestamp
+    @CreatedDate
     private Date created_at = new Date();
 
 
@@ -57,6 +58,26 @@ public class History {
         this.input = input;
         this.output = output;
         this.lang = lang;
+    }
+
+    public History(String id, String input, String lang, CategorizerImpl.CategoryResult output, String state, Date created_at) {
+        this.id = id;
+        this.input = input;
+        this.lang = lang;
+        this.output = output;
+        this.state = state;
+        this.created_at = created_at;
+    }
+
+    @TestOnly
+    public History(String id, String input, CategorizerImpl.CategoryResult output, String lang) {
+        this.id = id;
+        this.input = input;
+        this.output = output;
+        this.lang = lang;
+    }
+
+    public History() {
     }
 
     /**
@@ -89,5 +110,17 @@ public class History {
             default:
                 this.state = WAITING;
         }
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getInput() {
+        return input;
     }
 }

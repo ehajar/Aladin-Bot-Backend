@@ -188,10 +188,7 @@ class LangController {
             val resp = this.responseRepo.findById("detectedLang").get();
             res.addAttribute("message", (resp.values[lang.substring(0, 2)] as ArrayList<String>)[0])
         }
-
         res.addAttribute("langCode", langCode)
         return res
     }
-
-
 }

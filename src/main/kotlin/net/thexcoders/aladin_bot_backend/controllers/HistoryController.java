@@ -130,7 +130,6 @@ public class HistoryController {
             value.changeState(state != null ? state : 1);
             historyRepository.save(value);
         });
-
     }
 
 

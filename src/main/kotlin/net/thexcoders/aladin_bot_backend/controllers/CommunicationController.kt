@@ -4,6 +4,7 @@ import net.thexcoders.aladin_bot_backend.converters.LangConverter.codeToLangConv
 import net.thexcoders.aladin_bot_backend.models.History
 import net.thexcoders.aladin_bot_backend.nlp_models.ModelsOrchestrer
 import net.thexcoders.aladin_bot_backend.nlp_models.ModelsOrchestrerImpl
+import net.thexcoders.aladin_bot_backend.nlp_models.categorizer.CategorizerImpl.CategoryResult
 import net.thexcoders.aladin_bot_backend.repositories.HistoryRepository
 import net.thexcoders.aladin_bot_backend.repositories.ResponseRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -80,7 +81,7 @@ class CommunicationController {
             3 ->
                 return randomise("makersList", lang) + randomise("makers", lang)
             4 ->
-                return randomise("checkTime", lang) + " " + Date().toLocaleString()
+                return randomise("checkTime", lang) + " " + Date();
             5 ->
                 return randomise("bestPlaces", lang) + " " + randomise("places", lang)
             6 ->

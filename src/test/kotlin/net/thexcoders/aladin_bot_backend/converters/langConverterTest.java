@@ -15,6 +15,7 @@ class langConverterTest {
         assertEquals(AR, langToCodeConverter("ara"));
         assertEquals(EN, langToCodeConverter("eng"));
     }
+
     @Test
     void testInvalidLang() {
         assertEquals(UNKNOWN, langToCodeConverter("ger"));
