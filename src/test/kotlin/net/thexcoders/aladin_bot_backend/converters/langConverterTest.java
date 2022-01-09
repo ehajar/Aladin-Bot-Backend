@@ -4,7 +4,7 @@ import net.thexcoders.aladin_bot_backend.nlp_models.categorizer.Categorizer;
 import org.junit.jupiter.api.Test;
 
 import static net.thexcoders.aladin_bot_backend.converters.LangConverter.*;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 class langConverterTest {

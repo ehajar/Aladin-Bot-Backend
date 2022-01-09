@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: net.thexcoders.aladin_bot_backend.nlp_models.NLPModelsTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.595 s - in net.thexcoders.aladin_bot_backend.nlp_models.NLPModelsTest

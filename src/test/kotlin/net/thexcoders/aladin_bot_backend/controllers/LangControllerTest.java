@@ -7,7 +7,6 @@ import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -33,41 +32,42 @@ class LangControllerTest {
     private static final String TEST_UNKNOWN_MESSAGE = "Hallo, wie geht's dir heute?";
     private static final String TEST_FRENCH_MESSAGE = "Bonsoir j'espère que vous allez bien ce soir?";
 
-    private static final Responses myResponse = new Responses("detectedLang","fr")
+    private static final Responses myResponse = new Responses("detectedLang", "fr")
             .add("").setLang("en").add("");
-
 
     @Autowired
     private MockMvc mockMvc;
-
 
     @MockBean
     private ResponseRepository responseRepo;
 
     @Test
     public void detectFrenchLanguage() throws Exception {
-        checkLanguage(TEST_FRENCH_MESSAGE,LangConverter.FR);
+        checkLanguage(TEST_FRENCH_MESSAGE, LangConverter.FR);
     }
 
     @Test
     public void detectEnglishLanguage() throws Exception {
-        checkLanguage(TEST_ENGLISH_MESSAGE,LangConverter.EN);
+        checkLanguage(TEST_ENGLISH_MESSAGE, LangConverter.EN);
     }
 
     @Test
     public void detectUnknownLanguage() throws Exception {
-        checkLanguage(TEST_UNKNOWN_MESSAGE,LangConverter.UNKNOWN);
+        checkLanguage(TEST_UNKNOWN_MESSAGE, LangConverter.UNKNOWN);
     }
 
 
-    public void checkLanguage(String message, int expectedLanguage) throws Exception{
+    public void checkLanguage(String message, int expectedLanguage) throws Exception {
 
+        // préparation du faux résultat de l'appel
         when(responseRepo.findById("detectedLang")).thenReturn(Optional.of(myResponse));
         when(responseRepo.findById("unknownLanguage")).thenReturn(Optional.of(myResponse));
 
+        // préparation des donnés de la modification
         JSONObject data = new JSONObject();
         data.put("message", message);
 
+        // appel de l'API responsable de la modification
         this.mockMvc.perform(post("/API/language/get")
                 .content(data.toString())
                 .contentType("application/json"))
@@ -78,6 +78,7 @@ class LangControllerTest {
                         String jsonResponse = result.getResponse().getContentAsString();
                         JSONObject json = new JSONObject(jsonResponse);
                         int lang = (int) json.get("langCode");
+                        // verification de l'exactitude des données
                         assertEquals(expectedLanguage, lang);
                     }
                 });
